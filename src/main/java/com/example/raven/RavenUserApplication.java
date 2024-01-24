@@ -1,4 +1,4 @@
-package com.example.raven_user;
+package com.example.raven;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

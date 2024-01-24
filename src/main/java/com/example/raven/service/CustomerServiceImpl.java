@@ -1,4 +1,4 @@
-package com.example.raven_user.service;
+package com.example.raven.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

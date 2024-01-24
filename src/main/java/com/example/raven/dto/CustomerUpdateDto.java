@@ -1,4 +1,4 @@
-package com.example.raven_user.dto;
+package com.example.raven.dto;
 
 public class CustomerUpdateDto {
 }

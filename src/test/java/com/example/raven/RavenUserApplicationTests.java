@@ -1,4 +1,4 @@
-package com.example.raven_user;
+package com.example.raven;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
