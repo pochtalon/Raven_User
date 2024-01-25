@@ -18,6 +18,6 @@ public class CustomerCreateDto {
     @Email
     private String email;
     @Size(min = 6, max = 14)
-    @Pattern(regexp="\\+[0-9]{5,13}")
+    @Pattern(regexp = "\\+[0-9]{5,13}")
     private String phone;
 }
