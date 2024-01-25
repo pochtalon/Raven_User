@@ -3,7 +3,7 @@ package com.example.raven.config;
 import org.testcontainers.containers.MySQLContainer;
 
 public class CustomMySqlContainer extends MySQLContainer<CustomMySqlContainer> {
-    private static final String DB_IMAGE = "mysql:8";
+    private static final String DB_IMAGE = "mysql:8.0.33";
     private static CustomMySqlContainer mySqlContainer;
 
     private CustomMySqlContainer() {
