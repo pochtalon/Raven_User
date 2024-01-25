@@ -17,7 +17,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -41,14 +40,8 @@ class CustomerServiceImplTest {
                 .setEmail(EMAIL)
                 .setFullName(FULL_NAME)
                 .setPhone(PHONE);
-        Customer customer = new Customer()
-                .setEmail(EMAIL)
-                .setFullName(FULL_NAME)
-                .setPhone(PHONE);
-        CustomerDto expected = new CustomerDto()
-                .setEmail(EMAIL)
-                .setFullName(FULL_NAME)
-                .setPhone(PHONE);
+        Customer customer = createCustomer();
+        CustomerDto expected = createCustomerDto();
 
         when(customerMapper.toModel(requestDto)).thenReturn(customer);
         when(customerRepository.save(customer)).thenReturn(customer);
@@ -61,14 +54,8 @@ class CustomerServiceImplTest {
     @Test
     @DisplayName("Get all customers")
     public void getAllCustomers_ReturnListOfCustomers(){
-        Customer customer = new Customer()
-                .setEmail(EMAIL)
-                .setFullName(FULL_NAME)
-                .setPhone(PHONE);
-        CustomerDto customerDto = new CustomerDto()
-                .setEmail(EMAIL)
-                .setFullName(FULL_NAME)
-                .setPhone(PHONE);
+        Customer customer = createCustomer();
+        CustomerDto customerDto = createCustomerDto();
         List<Customer> customers = List.of(customer);
         List<CustomerDto> expected = List.of(customerDto);
 
@@ -82,14 +69,8 @@ class CustomerServiceImplTest {
     @Test
     @DisplayName("Get customer by valid id")
     public void getById_ValidId_ReturnCustomerDto(){
-        Customer customer = new Customer()
-                .setEmail(EMAIL)
-                .setFullName(FULL_NAME)
-                .setPhone(PHONE);
-        CustomerDto expected = new CustomerDto()
-                .setEmail(EMAIL)
-                .setFullName(FULL_NAME)
-                .setPhone(PHONE);
+        Customer customer = createCustomer();
+        CustomerDto expected = createCustomerDto();
 
         when(customerRepository.findById(anyLong())).thenReturn(Optional.of(customer));
         when(customerMapper.toDto(customer)).thenReturn(expected);
@@ -120,10 +101,7 @@ class CustomerServiceImplTest {
                 .setEmail(EMAIL)
                 .setFullName("Allan Poe")
                 .setPhone("+380502641937");
-        CustomerDto expected = new CustomerDto()
-                .setEmail(EMAIL)
-                .setFullName(FULL_NAME)
-                .setPhone(PHONE);
+        CustomerDto expected = createCustomerDto();
 
         when(customerRepository.findById(ID)).thenReturn(Optional.of(customer));
         when(customerRepository.save(customer)).thenReturn(customer);
@@ -145,5 +123,19 @@ class CustomerServiceImplTest {
         String expected = "Can't find customer with id " + ID;
         String actual = exception.getMessage();
         assertEquals(expected, actual);
+    }
+
+    private static Customer createCustomer() {
+        return new Customer()
+                .setEmail(EMAIL)
+                .setFullName(FULL_NAME)
+                .setPhone(PHONE);
+    }
+
+    private static CustomerDto createCustomerDto() {
+        return new CustomerDto()
+                .setEmail(EMAIL)
+                .setFullName(FULL_NAME)
+                .setPhone(PHONE);
     }
 }

@@ -14,7 +14,7 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Data
-@SQLDelete(sql = "UPDATE users SET is_active = TRUE WHERE id = ?")
+@SQLDelete(sql = "UPDATE customers SET is_active = TRUE WHERE id = ?")
 @Where(clause = "is_active = FALSE")
 @Table(name = "customers")
 @Accessors(chain = true)
