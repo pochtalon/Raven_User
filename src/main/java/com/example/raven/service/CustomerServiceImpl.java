@@ -7,11 +7,10 @@ import com.example.raven.exception.EntityNotFoundException;
 import com.example.raven.mapper.CustomerMapper;
 import com.example.raven.model.Customer;
 import com.example.raven.repository.CustomerRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
@@ -20,7 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerMapper customerMapper;
 
     @Override
-    public CustomerDto save(CustomerCreateDto requestDto) {
+    public CustomerDto saveCustomer(CustomerCreateDto requestDto) {
         Customer customer = customerMapper.toModel(requestDto);
         LocalDateTime creatingTime = LocalDateTime.now();
         customer.setCreated(creatingTime);

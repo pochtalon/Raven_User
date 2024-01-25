@@ -1,0 +1,39 @@
+version: "3.8"
+
+name: raven-container
+services:
+  ravendb:
+    image: postgres
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DATABASE
+    ports:
+      - $POSTGRES_LOCAL_PORT:$POSTGRES_DOCKER_PORT
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 50s
+      retries: 3
+  app:
+    depends_on:
+      - ravendb
+    restart: on-failure
+    image: raven-app
+    build: .
+    env_file:
+      - ./.env
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+      - $DEBUG_PORT:$DEBUG_PORT
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url" : "jdbc:postgresql://ravendb:$POSTGRES_DOCKER_PORT/$POSTGRES_DATABASE",
+        "spring.datasource.username" : "$POSTGRES_USER",
+        "spring.datasource.password" : "$POSTGRES_PASSWORD",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect"
+      }'
+      JAVA_TOOL_OPTION: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"

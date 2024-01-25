@@ -28,7 +28,7 @@ public class CustomerController {
     @PostMapping
     @Operation(summary = "Create new customer", description = "Create new customer")
     public CustomerDto addCustomer(@RequestBody @Valid CustomerCreateDto createDto) {
-        return customerService.save(createDto);
+        return customerService.saveCustomer(createDto);
     }
 
     @GetMapping
