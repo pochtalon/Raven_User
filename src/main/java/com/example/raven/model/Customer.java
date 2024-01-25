@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -16,6 +17,7 @@ import org.hibernate.annotations.Where;
 @SQLDelete(sql = "UPDATE users SET is_active = TRUE WHERE id = ?")
 @Where(clause = "is_active = FALSE")
 @Table(name = "customers")
+@Accessors(chain = true)
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

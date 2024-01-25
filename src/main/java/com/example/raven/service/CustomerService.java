@@ -6,7 +6,7 @@ import com.example.raven.dto.CustomerUpdateDto;
 import java.util.List;
 
 public interface CustomerService {
-    CustomerDto save(CustomerCreateDto requestDto);
+    CustomerDto saveCustomer(CustomerCreateDto requestDto);
 
     List<CustomerDto> getAllCustomers();
 
