@@ -46,7 +46,7 @@ public class CustomerController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update customer by id", description = "Update customer by id")
-    public CustomerDto updateProject(@PathVariable Long id,
+    public CustomerDto updateCustomer(@PathVariable Long id,
                                     @Valid @RequestBody CustomerUpdateDto updateDto) {
         return customerService.updateCustomer(id, updateDto);
     }
